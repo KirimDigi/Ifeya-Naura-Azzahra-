@@ -1,0 +1,49 @@
+﻿@font-face {
+  font-family: 'Andika';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(s/andika/v27/mem9Ya6iyW-Lwqgwb7YV.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Andika';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url(s/andika/v27/mem6Ya6iyW-Lwqgwb46pV50e.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Andika';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(s/andika/v27/mem_Ya6iyW-LwqgAbQ.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Andika';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(s/andika/v27/mem8Ya6iyW-Lwqg40ZM1Ug.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'DM Serif Display';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(s/dmserifdisplay/v17/-nFhOHM81r4j6k0gjAW3mujVU2B2G_Vx1w.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'DM Serif Display';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(s/dmserifdisplay/v17/-nFnOHM81r4j6k0gjAW3mujVU2B2K_c.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Vibur';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(s/vibur/v24/DPEiYwmEzw0QRjTp.ttf) format('truetype');
+}
