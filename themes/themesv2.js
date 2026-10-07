@@ -305,7 +305,7 @@ var initMusic = function initMusic() {
     music.muted = true;
     music.volume = 0;
     try {
-      if (music.currentTime < 14) music.currentTime = 14;
+      if (music.currentTime < 13) music.currentTime = 13;
     } catch(e) {}
   }
 
@@ -357,7 +357,7 @@ var initMusic = function initMusic() {
     if (music) {
       if (musicPlaying) {
         try {
-          if (music.currentTime < 14) music.currentTime = 14;
+          if (music.currentTime < 13) music.currentTime = 13;
         } catch(e) {}
         var playPromise = music.play();
 
@@ -862,14 +862,14 @@ var openInvitation = function openInvitation(event) {
     }
   }
 
-  // play music (mulai detik 14, loop pada 05:24 = 324s)
+  // play music (mulai detik 13, loop pada 05:24 = 324s)
   var musicEl = document.getElementById("music");
   if (musicEl) {
     try {
-      musicEl.currentTime = 14;
+      musicEl.currentTime = 13;
       musicEl.addEventListener("timeupdate", function () {
         if (musicEl.currentTime >= 324) {
-          musicEl.currentTime = 14;
+          musicEl.currentTime = 13;
         }
       });
     } catch (e) {}

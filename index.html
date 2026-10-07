@@ -214,7 +214,7 @@ body, .font-base {
         <div id="loader" class="loader-wrapper"><span class="loader"><span class="loader-inner"></span></span></div>
                 <!-- music -->
                         <audio id="music" loop="" autoplay="" preload="auto">
-            <source src="Tiara Andini - Tulang dan Nadi (Official Music Video).mp3#t=14" type="audio/mpeg">
+            <source src="Tiara Andini - Tulang dan Nadi (Official Music Video).mp3#t=13" type="audio/mpeg">
             </audio>
                     <!-- end music -->
                 <div id="workspace-container" class="position-fixed h-100 w-100" style="overflow: hidden">
@@ -438,7 +438,7 @@ body, .font-base {
                                                             <!-- Button Tampilkan / Sembunyikan Ucapan -->
                                                             <button type="button" id="btnToggleUcapan" onclick="toggleUcapanList()" class="btn btn-outline-primary rounded-pill w-100 mt-2 shadow-sm" style="font-size: 13.5px; padding: 8px 18px; font-weight: 600; border-color: #e09bac; color: #a24b68; background: rgba(224, 155, 172, 0.1);">
                                                                 <svg id="iconToggleUcapan" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 256 256" style="vertical-align: -2px; margin-right: 4px;"><path d="M247.31,124.76c-.35-.79-8.82-19.58-27.65-38.41C194.57,61.26,162.88,48,128,48S61.43,61.26,36.34,86.35C17.51,105.18,9,124,8.69,124.76a8,8,0,0,0,0,6.5c.35.79,8.82,19.57,27.65,38.4C61.43,194.74,93.12,208,128,208s66.57-13.26,91.66-38.34c18.83-18.83,27.3-37.61,27.65-38.4A8,8,0,0,0,247.31,124.76ZM128,192c-30.78,0-59.7-11.57-81.41-32.58-13.88-13.43-22.38-27.42-25.27-32.42,2.89-5,11.39-19,25.27-32.42C68.3,73.57,97.22,62,128,62s59.7,11.57,81.41,32.58c13.88,13.43,22.38,27.42,25.27,32.42-2.89,5-11.39,19-25.27,32.42C187.7,180.43,158.78,192,128,192Zm0-112a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160Z"></path></svg>
-                                                                <span id="textToggleUcapan">Tampilkan Ucapan</span> (<span id="ucapanCount">0</span>)
+                                                                <span id="textToggleUcapan">Tampilkan Ucapan</span> (<span id="ucapanCount">1</span>)
                                                             </button>
 
                                                             <!-- Container Daftar Ucapan -->
@@ -823,7 +823,7 @@ body, .font-base {
     <script src="themes/theme-app.js?v=260626"></script>
 
         
-    <script src="themes/themesv2.js?v=260627"></script>
+    <script src="themes/themesv2.js?v=260628"></script>
 
     <script>
         var notSupport = document.getElementById('notSupport');
@@ -874,11 +874,11 @@ body, .font-base {
             document.body.removeChild(textArea);
         }
 
-        // Pengaturan musik: Mulai dari detik 14 dan loop di 05:24 (324 detik)
+        // Pengaturan musik: Mulai dari detik 13 dan loop di 05:24 (324 detik)
         (function() {
             var music = document.getElementById('music');
             if (!music) return;
-            var startAt = 14;   // Detik 14
+            var startAt = 13;   // Detik 13
             var loopAt = 324;   // 05:24
 
             function applyStartTime() {
@@ -999,19 +999,22 @@ body, .font-base {
             return text.replace(/[&<>"']/g, function(m) { return map[m]; });
         }
 
-        function loadUcapan() {
+        function loadUcapan(isManual) {
             var loading = document.getElementById('ucapanLoading');
-            if (loading) loading.style.display = 'block';
+            if (loading && isManual) loading.style.display = 'block';
 
             var local = localStorage.getItem('local_ucapan_data');
             var localItems = local ? JSON.parse(local) : [];
 
-            if (GAS_URL && GAS_URL.indexOf('AKfycby') === -1) { // jika URL deployment asli sudah diisi
+            if (GAS_URL && GAS_URL.indexOf('AKfycby') === -1) {
                 fetch(GAS_URL)
                     .then(function(res) { return res.json(); })
                     .then(function(res) {
                         if (res && res.status === 'success' && res.data) {
                             ucapanDataCache = res.data;
+                            try {
+                                localStorage.setItem('local_ucapan_data', JSON.stringify(res.data));
+                            } catch(e) {}
                             renderUcapanList(res.data);
                         } else {
                             renderUcapanList(localItems);
@@ -1106,11 +1109,18 @@ body, .font-base {
             }
             var local = localStorage.getItem('local_ucapan_data');
             if (local) {
-                var items = JSON.parse(local);
-                var countEl = document.getElementById('ucapanCount');
-                if (countEl) countEl.textContent = items.length;
+                try {
+                    var items = JSON.parse(local);
+                    var countEl = document.getElementById('ucapanCount');
+                    if (countEl && items && items.length) countEl.textContent = items.length;
+                } catch(e) {}
             }
+            // Langsung fetch data ucapan dari Google Spreadsheet di awal
+            loadUcapan(false);
         });
+
+        // Trigger fetch langsung saat script berjalan
+        loadUcapan(false);
     </script>
 </body>
 
