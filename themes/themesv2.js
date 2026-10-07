@@ -735,7 +735,7 @@ var initialX = 0,
 
 var isInteractive = function isInteractive(target) {
   if (!target) return false;
-  return !!target.closest('input, textarea, select, button, a, .modal, #rsvpModal, #qrModal, #ucapanListContainer, .pswp, .copy-btn, [data-copy]');
+  return !!target.closest('input, textarea, select, button, a, .modal, #rsvpModal, #qrModal, #ucapanListContainer, .pswp, .copy-btn, [data-copy], .gallery-scroll');
 };
 
 var eventMove = function eventMove(e) {
@@ -859,11 +859,16 @@ var openInvitation = function openInvitation(event) {
     }
   }
 
-  // play music
+  // play music (mulai 01:18 = 78s, loop pada 05:24 = 324s)
   var musicEl = document.getElementById("music");
   if (musicEl) {
     try {
-      musicEl.currentTime = 12;
+      musicEl.currentTime = 78;
+      musicEl.addEventListener("timeupdate", function () {
+        if (musicEl.currentTime >= 324) {
+          musicEl.currentTime = 78;
+        }
+      });
     } catch (e) {}
   }
   playMusic(true);
