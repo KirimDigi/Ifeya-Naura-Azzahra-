@@ -305,7 +305,7 @@ var initMusic = function initMusic() {
     music.muted = true;
     music.volume = 0;
     try {
-      if (music.currentTime < 12) music.currentTime = 12;
+      if (music.currentTime < 14) music.currentTime = 14;
     } catch(e) {}
   }
 
@@ -356,6 +356,9 @@ var initMusic = function initMusic() {
     // Kontrol audio berdasarkan elemen yang tersedia
     if (music) {
       if (musicPlaying) {
+        try {
+          if (music.currentTime < 14) music.currentTime = 14;
+        } catch(e) {}
         var playPromise = music.play();
 
         // Tangani promise untuk kompatibilitas browser
@@ -859,14 +862,14 @@ var openInvitation = function openInvitation(event) {
     }
   }
 
-  // play music (mulai 01:18 = 78s, loop pada 05:24 = 324s)
+  // play music (mulai detik 14, loop pada 05:24 = 324s)
   var musicEl = document.getElementById("music");
   if (musicEl) {
     try {
-      musicEl.currentTime = 78;
+      musicEl.currentTime = 14;
       musicEl.addEventListener("timeupdate", function () {
         if (musicEl.currentTime >= 324) {
-          musicEl.currentTime = 78;
+          musicEl.currentTime = 14;
         }
       });
     } catch (e) {}
